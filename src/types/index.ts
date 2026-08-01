@@ -19,7 +19,7 @@ export type Category = {
     description?: string;
 };
 
-export type PropertyType = "APARTMENT" | "HOUSE" | "STUDIO" | "ROOM" | "COMMERCIAL";
+export type PropertyType = "APARTMENT" | "HOUSE" | "STUDIO" | "CONDO" | "ROOM";
 
 export type PropertyStatus = "AVAILABLE" | "RENTED" | "UNAVAILABLE";
 
@@ -57,6 +57,7 @@ export type RentalRequest = {
     message?: string;
     status: RentalRequestStatus;
     rejectReason?: string;
+    payment?: Payment;
     createdAt: string;
 };
 
