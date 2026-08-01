@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+:root {
+  --color-ink: #14251F;
+  --color-pine: #16302B;
+  --color-pine-light: #234A41;
+  --color-moss: #3E6E63;
+  --color-gold: #C98F2C;
+  --color-gold-light: #E4B565;
+  --color-paper: #FAF8F3;
+  --color-paper-dim: #F1ECE1;
+  --color-line: #E4DFD2;
+  --color-red: #B54A3F;
+
+  --background: var(--color-paper);
+  --foreground: var(--color-ink);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-ink: var(--color-ink);
+  --color-pine: var(--color-pine);
+  --color-pine-light: var(--color-pine-light);
+  --color-moss: var(--color-moss);
+  --color-gold: var(--color-gold);
+  --color-gold-light: var(--color-gold-light);
+  --color-paper: var(--color-paper);
+  --color-paper-dim: var(--color-paper-dim);
+  --color-line: var(--color-line);
+  --color-red: var(--color-red);
+
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: var(--color-gold-light);
+  color: var(--color-ink);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* focus visibility */
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* tag-shaped price badge, the signature motif */
+.tag-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.7rem 0.3rem 0.9rem;
+  background: var(--color-pine);
+  color: var(--color-paper);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  clip-path: polygon(10px 0, 100% 0, 100% 100%, 10px 100%, 0 50%);
+}
+
+.tag-badge::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--color-gold-light);
+}
