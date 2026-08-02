@@ -31,5 +31,6 @@
     "eslint-config-next": "16.2.12",
     "tailwindcss": "^4",
     "typescript": "^5"
-  }
+  },
+  "description": "Next.js frontend for RentNest, a rental property marketplace."
 }
