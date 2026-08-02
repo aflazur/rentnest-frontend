@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { LoginForm } from "@/components/auth/login-form";
 
 export const metadata: Metadata = { title: "Log in — RentNest" };
@@ -12,7 +13,9 @@ export default function LoginPage() {
                 Browse listings, track requests, and manage payments.
             </p>
             <div className="mt-8">
-                <LoginForm />
+                <Suspense>
+                    <LoginForm />
+                </Suspense>
             </div>
         </div>
     );
