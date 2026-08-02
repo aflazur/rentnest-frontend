@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Home } from "lucide-react";
 import type { SessionUser } from "@/types";
 import { NavAuthArea } from "@/components/layout/nav-auth-area";
+import { MobileNav } from "@/components/layout/mobile-nav";
 
 const ROLE_HOME: Record<string, string> = {
     TENANT: "/dashboard/tenant",
@@ -12,7 +13,7 @@ const ROLE_HOME: Record<string, string> = {
 export function Navbar({ user }: { user: SessionUser | null }) {
     return (
         <header className="sticky top-0 z-40 border-b border-line bg-paper/90 backdrop-blur">
-            <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
+            <div className="relative mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
                 <Link href="/" className="flex items-center gap-2">
                     <span className="flex h-8 w-8 items-center justify-center rounded-sm bg-pine text-paper">
                         <Home className="h-4 w-4" strokeWidth={2} />
@@ -31,7 +32,10 @@ export function Navbar({ user }: { user: SessionUser | null }) {
                     )}
                 </nav>
 
-                <NavAuthArea user={user} />
+                <div className="flex items-center gap-2">
+                    <NavAuthArea user={user} />
+                    <MobileNav user={user} />
+                </div>
             </div>
         </header>
     );
