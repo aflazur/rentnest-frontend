@@ -61,13 +61,14 @@ export function LinkButton({
     size = "md",
     className,
     children,
+    ...props
 }: {
     href: string;
     variant?: Variant;
     size?: Size;
     className?: string;
     children: React.ReactNode;
-}) {
+} & Omit<React.ComponentProps<typeof Link>, "href" | "className" | "children">) {
     return (
         <Link
             href={href}
@@ -77,6 +78,7 @@ export function LinkButton({
                 sizeClasses[size],
                 className
             )}
+            {...props}
         >
             {children}
         </Link>

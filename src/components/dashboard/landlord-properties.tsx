@@ -61,12 +61,14 @@ export function LandlordProperties() {
                                     href={`/dashboard/landlord/properties/${p.id}/edit`}
                                     variant="ghost"
                                     size="sm"
+                                    aria-label={`Edit ${p.title}`}
                                 >
                                     <Pencil className="h-3.5 w-3.5" />
                                 </LinkButton>
                                 <Button
                                     variant="ghost"
                                     size="sm"
+                                    aria-label={`Remove ${p.title}`}
                                     onClick={() => {
                                         if (confirm(`Remove "${p.title}"? This cannot be undone.`)) {
                                             del.mutate(p.id);
