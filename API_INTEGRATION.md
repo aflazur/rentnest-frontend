@@ -64,19 +64,37 @@ straight from the browser to the backend, with the access token attached as a
 
 The original backend redirected Stripe's `success_url`/`cancel_url` straight to
 the API (`/api/payments/confirm`). For the frontend to show a proper UI on
-success/cancel, the backend's `payment.service.ts` was updated to redirect to
-the **frontend** instead:
+success/cancel, there are two ways to fix this — pick whichever fits:
+
+**Option A — redeploy the backend with the redirect fix (recommended if you
+can freely redeploy your backend).** `payment.service.ts` was updated to build
+the URLs from a new `frontend_url` config value instead of `base_url`:
 
 ```
 success_url: `${FRONTEND_URL}/payment/success?transactionId=...&session_id={CHECKOUT_SESSION_ID}`
 cancel_url:  `${FRONTEND_URL}/payment/cancel?transactionId=...`
 ```
 
-This requires a new `FRONTEND_URL` environment variable on the **backend**
-deployment (e.g. `https://rentnest-frontend.vercel.app`). The `/payment/success`
-page then calls `GET {API}/payments/confirm` itself (client-side, unauthenticated
-— this route has no `auth()` middleware on the backend) to finalize the payment
-and display the result.
+This needs a new `FRONTEND_URL` environment variable on the backend
+deployment (e.g. `https://rentnest-frontend.vercel.app`).
+
+**Option B — reuse an already-deployed backend with zero code changes**
+(useful if that backend is a separate, already-submitted assignment you don't
+want to touch). The *unmodified* backend still builds its URLs as
+`${BASE_URL}/api/payments/confirm` / `${BASE_URL}/api/payments/cancel`. If you
+just change the backend's `BASE_URL` environment variable (a Vercel dashboard
+setting — no git push, no code change) to point at this frontend's domain
+instead of the backend's own domain, Stripe will land the browser on
+`https://<frontend>/api/payments/confirm?...` and `.../api/payments/cancel?...`.
+This frontend has two small bridge Route Handlers
+(`src/app/api/payments/confirm/route.ts`, `.../cancel/route.ts`) that simply
+redirect those exact paths to the real `/payment/success` and
+`/payment/cancel` pages, preserving all query params. The `/payment/success`
+page then calls `GET {API}/payments/confirm` itself to finalize the payment.
+
+Either option, the `/payment/success` page then calls `GET {API}/payments/confirm?transactionId=&session_id=`
+(client-side, unauthenticated — this route has no `auth()` middleware on the
+backend) to finalize the payment and display the result.
 
 ## Known simplifications
 
