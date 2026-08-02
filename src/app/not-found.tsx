@@ -8,7 +8,7 @@ export default function NotFound() {
             <Compass className="h-10 w-10 text-ink/30" strokeWidth={1.5} />
             <h1 className="mt-4 font-display text-2xl text-ink">Page not found</h1>
             <p className="mt-2 text-sm text-ink/60">
-                The page you're looking for doesn't exist or may have moved.
+                The page you&apos;re looking for doesn&apos;t exist or may have moved.
             </p>
             <LinkButton href="/" className="mt-6">
                 Back home
