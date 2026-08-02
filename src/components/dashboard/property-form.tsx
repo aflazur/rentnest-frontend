@@ -111,6 +111,11 @@ export function PropertyForm({ property }: { property?: Property }) {
                     ))}
                 </Select>
                 <FieldError message={errors.categoryId?.message} />
+                {categories && categories.length === 0 && (
+                    <p className="mt-1 text-xs text-ink/50">
+                        No categories exist yet — ask an admin to create one before listing a property.
+                    </p>
+                )}
             </div>
 
             <div>
