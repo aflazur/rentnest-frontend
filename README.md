@@ -2,7 +2,7 @@
 
 A rental property marketplace built with Next.js (App Router). Tenants browse and rent properties, landlords list and manage them, and admins oversee users, properties and rentals.
 
-[🌐 Live Site](https://rentnest-frontend-jade.vercel.app) • [⚙️ Live API](https://rentnest-backend-three.vercel.app/api)
+[🌐 Live Site](https://rentnest-frontend-jade.vercel.app) • [⚙️ Live API](https://rentnest-backend-for-a5.vercel.app/)
 
 ![RentNest](./public/RentNest.png)
 
@@ -87,7 +87,7 @@ src/
 |---|---|
 | Live frontend | https://rentnest-frontend-jade.vercel.app |
 | Live backend | https://rentnest-backend-three.vercel.app/api |
-| Backend repo | <add your backend repo link here> |
+| Backend repo | https://github.com/aflazur/rentnest-backend-for-A5|
 
 ## 👨‍💻 Author
 
