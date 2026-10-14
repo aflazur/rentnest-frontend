@@ -1,79 +1,95 @@
-# RentNest — Frontend 🏠
+# 🏠 RentNest — Frontend
 
-Next.js (App Router) frontend for the RentNest rental property marketplace.
-Consumes the [RentNest backend API](../rentnest-backend).
+A rental property marketplace built with Next.js (App Router). Tenants browse and rent properties, landlords list and manage them, and admins oversee users, properties and rentals.
 
-## Tech Stack
+[🌐 Live Site](https://rentnest-frontend-jade.vercel.app) • [⚙️ Live API](https://rentnest-backend-three.vercel.app/api)
 
-- Next.js 16 (App Router, Server + Client Components)
-- TypeScript
-- Tailwind CSS v4
-- TanStack Query (server state / data fetching)
-- React Hook Form + Zod (form state & validation)
-- Sonner (toast notifications)
-- Stripe Checkout (redirect-based, via the backend's hosted checkout session)
+![RentNest](./public/RentNest.png)
 
-## Getting started
 
-```bash
-npm install
-cp .env.example .env
-```
+## 🛠️ Tech Stack
 
-Fill in `.env`:
+| Area | Technology |
+|---|---|
+| Framework | Next.js 16 (App Router), React 19, TypeScript |
+| Styling | Tailwind CSS v4 |
+| Data fetching | TanStack Query |
+| Forms & validation | React Hook Form + Zod |
+| Notifications | Sonner |
+| Payment | Stripe Checkout (hosted session created by the backend) |
+| Deployment | Vercel |
 
-```
-NEXT_PUBLIC_API_BASE_URL=http://localhost:5000/api
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
-```
+## ✨ Core Features
 
-Run the dev server:
+- 🔐 Register as a **Tenant** or **Landlord**, with an **Admin** role seeded in the backend
+- 🛡️ Role-based route protection and redirects using `middleware.ts` and session cookies
+- 🏘️ Public property listing and property details pages
+- 🧑‍💼 Landlord dashboard: add, edit and delete properties, and manage rental requests
+- 🧑‍🤝‍🧑 Tenant dashboard: rental requests and payment flow
+- 💳 Stripe Checkout payment with success and cancel pages
+- 🛠️ Admin dashboard: manage users, properties and rentals
+- ✅ Form validation with Zod and toast feedback on every action
 
-```bash
-npm run dev
-```
+## 📦 Dependencies
 
-Visit `http://localhost:3000`.
+**Production:** next, react, react-dom, @tanstack/react-query, react-hook-form, @hookform/resolvers, zod, sonner, lucide-react, date-fns, clsx, tailwind-merge
 
-## Roles
+**Development:** typescript, tailwindcss, @tailwindcss/postcss, eslint, eslint-config-next, @types/node, @types/react, @types/react-dom
 
-Register as either a **Tenant** or a **Landlord** from `/auth/register`. An
-**Admin** account must already exist in the backend (seeded via the backend's
-`npm run seed`). Routes under `/dashboard/*` are protected by
-`middleware.ts`, which checks the session cookie and redirects based on role.
+## 🚀 Run Locally
 
-## Payment flow
+**Prerequisites:** Node.js 18+, npm, and the RentNest backend running locally (or use the live API).
 
-Tenants pay through Stripe Checkout (hosted by Stripe, session created by the
-backend). After payment, Stripe redirects back to this app's
-`/payment/success` or `/payment/cancel` pages. See `API_INTEGRATION.md` for
-the full flow and the required backend `FRONTEND_URL` environment variable.
+1. Clone the repository
+   ```bash
+   git clone https://github.com/aflazur/rentnest-frontend.git
+   ```
+2. Go to the project folder
+   ```bash
+   cd rentnest-frontend
+   ```
+3. Install dependencies
+   ```bash
+   npm install
+   ```
+4. Create your environment file
+   ```bash
+   cp .env.example .env
+   ```
+5. Fill in `.env`
+   ```env
+   NEXT_PUBLIC_API_BASE_URL=http://localhost:5000/api
+   NEXT_PUBLIC_SITE_URL=http://localhost:3000
+   ```
+   To use the deployed backend instead, set `NEXT_PUBLIC_API_BASE_URL=https://rentnest-backend-three.vercel.app/api`.
+6. Start the dev server and open http://localhost:3000
+   ```bash
+   npm run dev
+   ```
 
-## Deployment (Vercel)
+For Stripe redirects to work, the backend's `FRONTEND_URL` must point to this app. See [API_INTEGRATION.md](./API_INTEGRATION.md) for the full flow.
 
-1. Push this repo to GitHub, import it in Vercel.
-2. Set the environment variable `NEXT_PUBLIC_API_BASE_URL` to your deployed
-   backend's API URL (e.g. `https://rentnest-backend-three.vercel.app/api`).
-3. On the **backend** deployment, set `FRONTEND_URL` to this app's deployed
-   URL so Stripe redirects land on the frontend's success/cancel pages.
-4. Deploy.
-
-## Project structure
+## 🗂️ Project Structure
 
 ```
 src/
-  app/                 routes (App Router)
-    api/auth/          login/register/logout route handlers (proxy to backend)
-    auth/               login, register
-    properties/         public listing + details
-    dashboard/tenant/    tenant dashboard, payment flow
-    dashboard/landlord/  landlord dashboard, property CRUD, requests
-    dashboard/admin/     admin dashboard, users, properties, rentals
-    payment/             success / cancel pages
-  components/
-    auth/, properties/, dashboard/, layout/, ui/
-  hooks/                 TanStack Query hooks per resource
-  lib/                   API client, session/cookie helpers, Zod schemas, utils
-  types/                 shared TypeScript types matching the backend's Prisma models
-  middleware.ts          JWT-cookie route protection + role-based redirects
+  app/          routes (auth, properties, dashboard/tenant|landlord|admin, payment)
+  components/   auth, properties, dashboard, layout, ui
+  hooks/        TanStack Query hooks per resource
+  lib/          API client, session helpers, Zod schemas, utils
+  types/        shared TypeScript types
+  middleware.ts role-based route protection
 ```
+
+## 🔗 Links
+
+| | |
+|---|---|
+| Live frontend | https://rentnest-frontend-jade.vercel.app |
+| Live backend | https://rentnest-backend-three.vercel.app/api |
+| Backend repo | <add your backend repo link here> |
+
+## 👨‍💻 Author
+
+**Aflazur Rahaman** — Full Stack Web Developer
+GitHub: [@aflazur](https://github.com/aflazur)
